@@ -1,0 +1,26 @@
+{
+  "paths": {
+    "template_file": "MetaMaps_2023_06.set",
+    "hierarchical_output_dir": "outputs/hierarchical_microstates",
+    "spm_mixture_paths": [
+      "~/spm/toolbox/mixture",
+      "~/Downloads/spm/toolbox/mixture"
+    ]
+  },
+  "preprocessing": {
+    "apply_average_reference": true,
+    "filter_band": [2, 20],
+    "spatial_filter": "smoothing",
+    "spatial_filter_neighbours": 12,
+    "spatial_filter_strength": 0.75,
+    "reject_gfp_peak_outliers": true,
+    "gfp_outlier_mad_multiplier": 3
+  },
+  "hierarchical": {
+    "K_candidates": [2, 3, 4, 5, 6, 7],
+    "criterion": "free_energy_elbow",
+    "spm_prior_weight": 1,
+    "max_global_maps": 50000,
+    "max_child_maps": 50000
+  }
+}

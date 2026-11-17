@@ -1,0 +1,20 @@
+{
+  "externals": {
+    "HEPPy": {
+      "file_count": 8,
+      "path": "external/HEPPy",
+      "relationship": "Modified derivative: extended preprocessing (atomic saves, cardiac-artefact modes, PyPREP fallbacks, ICLabel via ONNX) plus ECG peak correction and statistics helpers.",
+      "tree_sha256": "2d0d8f2605237a9df9d58d3a201ffb1b452b561933fe5960b96dc8ba2530013e",
+      "upstream": "https://github.com/dr-r-kan/HEPPy"
+    },
+    "VG-microstates": {
+      "file_count": 16,
+      "path": "external/VG-microstates",
+      "relationship": "Modified derivative: variational Bayesian Gaussian-mixture microstates with a hierarchical (global, group, participant) fit, K selection by the free-energy elbow, template matching without forced classes and exact backfit.",
+      "tree_sha256": "883c29f69cd9ccd4bee5f2cd8ea6429bb9042d3737420ce2b6e0fc4015944e4c",
+      "upstream": "https://github.com/dr-r-kan/VG-microstates"
+    }
+  },
+  "metamaps_template_sha256": "ea2e94c09ab5ff7e213847a8120b110d2818d77bea812e2a5333d1e96029f5c2",
+  "schema": "fsms-external-provenance/1"
+}

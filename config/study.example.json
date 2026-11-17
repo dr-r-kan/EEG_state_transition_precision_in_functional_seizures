@@ -1,0 +1,44 @@
+{
+  "schema": "fsms-config/1",
+  "name": "study",
+  "paths": {
+    "data_root": "/path/to/study_data",
+    "run_root": "/path/to/analysis_output",
+    "existing_heppy_dir": null
+  },
+  "clips": {
+    "dir": "clips",
+    "database": "analysis_database.csv",
+    "snip_keyfile": "clips/snip_keyfile.csv"
+  },
+  "sources": {
+    "workbooks": {
+      "fs_dd_es": "/path/to/FS_DD_ES_Database.xlsx",
+      "metaeventmap": "/path/to/MetaEventMap.xlsx"
+    }
+  },
+  "heppy": {
+    "options": "config/heppy_options.json",
+    "workers": 4,
+    "use_existing_output": false
+  },
+  "manifest": {
+    "format": "mat",
+    "montage": "standard_1020",
+    "min_duration_s": 10
+  },
+  "microstates": {
+    "K_candidates": [2, 3, 4, 5, 6, 7],
+    "criterion": "free_energy_elbow",
+    "n_starts": 20
+  },
+  "analysis": {
+    "prior_strength": 10,
+    "max_autonomic_gap_s": 5.0,
+    "min_window_transitions": 30,
+    "min_reference_transitions": 300,
+    "min_baseline_windows": 5,
+    "min_interictal_windows": 5,
+    "null_draws": 400
+  }
+}

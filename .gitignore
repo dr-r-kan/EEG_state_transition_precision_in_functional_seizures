@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+*.part
+docs/RUN_AFTER_PREREGISTRATION.md
+HANDOFF.md
+.run.lock
+config/study.json
+private/
