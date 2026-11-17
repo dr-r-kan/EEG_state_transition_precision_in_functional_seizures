@@ -379,6 +379,22 @@ def _checkpoint_outputs(ctx: Context) -> list[Path]:
     return [ctx.config.release_dir / cp.CHECKPOINT_NAME]
 
 
+def audit_tokens(config: Config, index: pd.DataFrame) -> set[str]:
+    """Identifiers the statistics outputs must not contain.
+
+    The manifest's file paths contribute every long word in them, which includes the names of the pipeline's own
+    folders (``run_root``, ``data_root``).  Those words are not identifiers, and a folder called ``..._analysis``
+    would otherwise flag every table that has an ``analysis`` column.  They are dropped unless they are also a
+    participant or patient identifier.
+    """
+    from . import release
+    tokens = release.forbidden_tokens(index)
+    folders = {t.lower() for path in (config.run_root, config.data_root) for t in re.findall(r"[A-Za-z0-9]+", str(path))}
+    identifiers = {str(v).strip().lower() for col in ("participant", "patient_id") if col in index
+                   for v in index[col].dropna().unique()}
+    return tokens - (folders - identifiers)
+
+
 def _stats_fp(ctx: Context) -> str:
     c = ctx.config
     return fingerprint({"checkpoint": ctx.fingerprints["checkpoint"], "prereg_id": _require_id(ctx),
@@ -392,7 +408,7 @@ def _stats_run(ctx: Context) -> None:
     cp.require(c.release_dir, prereg_id)
     from .stats import run_statistics
     run_statistics(c.release_dir, c.results_dir, prereg_id)
-    release.audit_directory(c.results_dir, release.forbidden_tokens(pd.read_csv(c.manifest_mat)),
+    release.audit_directory(c.results_dir, audit_tokens(c, pd.read_csv(c.manifest_mat)),
                             set(pd.read_csv(c.release_dir / "participants.csv").participant_id))
 
 
